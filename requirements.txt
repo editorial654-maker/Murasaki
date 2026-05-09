@@ -1,4 +1,4 @@
 python-telegram-bot>=20.7,<21.0
 python-gitlab>=4.4.0
 httpx>=0.25.0,<0.26.0
-EOF
+
