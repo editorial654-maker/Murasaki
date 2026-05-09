@@ -1,1 +1,1 @@
-worker: python3 gitlab.py
+worker: python3 Bgmi.py
