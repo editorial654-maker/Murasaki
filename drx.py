@@ -528,8 +528,16 @@ def process_updates():
             
             if text.startswith("/"):
                 parts = text.split()
-                command = parts[0].lower()
+                raw_command = parts[0].lower()
                 args = parts[1:] if len(parts) > 1 else []
+                
+                # ========== FIX: Remove @botname from command ==========
+                # If command has @botname, strip it (e.g., /help@Murasaki_69_bot -> /help)
+                if '@' in raw_command:
+                    command = raw_command.split('@')[0]
+                else:
+                    command = raw_command
+                # =====================================================
                 
                 if command == "/start":
                     handle_start(chat_id, user_id, first_name)
