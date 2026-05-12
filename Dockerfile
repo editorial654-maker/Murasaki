@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 COPY attack.c .
-COPY drx.py .
+COPY super.py .
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
@@ -46,4 +46,4 @@ echo ""\n\
 echo "📡 Bot is LIVE - Awaiting commands..."\n\
 echo "🛸═══════════════════════════════════════════════════════════🛸"\n' > /railway_notify.sh && chmod +x /railway_notify.sh
 
-CMD /railway_notify.sh && python drx.py
+CMD /railway_notify.sh && python super.py
