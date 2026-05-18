@@ -1,33 +1,26 @@
 #!/bin/bash
 
-echo "🚀 DRX POWER SYSTEM STARTING..."
+echo "🚀 DRX POWER SYSTEM STARTING ON RAILWAY..."
 
-# 1. Sabse pehle zaroori libraries install karega
+# 1. Install libraries
 echo "📦 Installing Python libraries..."
 pip install flask telebot requests psutil --quiet
 
-# 2. C Binary ko compile karega (High Power Mode)
+# 2. Compile C Binary
 echo "⚙️ Compiling drx.c binary..."
 gcc drx.c -o drx -lpthread -O3
 chmod +x drx
 
-# 3. Purane sessions ko band karega agar koi chal raha ho
-echo "🧹 Cleaning old sessions..."
-pkill -f api.py
-pkill -f drx.py
-
-# 4. API ko background mein start karega (Port 8080)
-echo "🌐 Starting Flask API on port 8080..."
-nohup python3 api.py > api_logs.txt 2>&1 &
+# 3. Start Telegram Bot in the BACKGROUND
+echo "🤖 Starting Telegram Bot in background..."
+nohup python3 drx.py > bot_logs.txt 2>&1 &
 sleep 2
 
-# 5. Telegram Bot ko background mein start karega
-echo "🤖 Starting Telegram Bot..."
-nohup python3 drx.py > bot_logs.txt 2>&1 &
+# 4. Start Flask API in the FOREGROUND
+# Railway requires the web server (Flask) to be in the foreground to monitor port 8080.
+echo "🌐 Starting Flask API on port 8080..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ SYSTEM IS NOW LIVE ON RAILWAY!"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "✅ SYSTEM IS NOW LIVE!"
-echo "📡 API Status: Running"
-echo "🤖 Bot Status: Running"
-echo "📝 Logs saved in: api_logs.txt and bot_logs.txt"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+python3 api.py
